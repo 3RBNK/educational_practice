@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include "algorithms/task/6_get_upper_envelope.h"
+#include "algorithms/task/7_get_multiples_of_eleven.h"
 
 int main(void) {
-    print_upper_envelope();
+    printf("answer: %d\n", get_multiples_of_eleven(345));
 
     return 0;
 }

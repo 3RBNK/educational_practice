@@ -14,5 +14,6 @@ add_executable(practice main.c
         data_structures/matrix/matrix.h
         data_structures/matrix/matrix.c
         algorithms/task/5_is_transposed_matrix.h
-        algorithms/task/6_get_upper_envelope.h)
+        algorithms/task/6_get_upper_envelope.h
+        algorithms/task/7_get_multiples_of_eleven.h)
 target_link_libraries(practice m)

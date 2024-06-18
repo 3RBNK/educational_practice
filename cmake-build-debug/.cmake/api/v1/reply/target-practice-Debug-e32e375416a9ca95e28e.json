@@ -31,7 +31,7 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 18,
+				"line" : 19,
 				"parent" : 0
 			}
 		]
@@ -109,7 +109,8 @@
 				4,
 				5,
 				7,
-				8
+				8,
+				9
 			]
 		}
 	],
@@ -160,6 +161,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "algorithms/task/6_get_upper_envelope.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "algorithms/task/7_get_multiples_of_eleven.h",
 			"sourceGroupIndex" : 1
 		}
 	],
