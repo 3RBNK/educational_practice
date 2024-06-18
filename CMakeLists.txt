@@ -13,5 +13,6 @@ add_executable(practice main.c
         algorithms/task/4_subtrack_average.h
         data_structures/matrix/matrix.h
         data_structures/matrix/matrix.c
-        algorithms/task/5_is_transposed_matrix.h)
+        algorithms/task/5_is_transposed_matrix.h
+        algorithms/task/6_get_upper_envelope.h)
 target_link_libraries(practice m)
