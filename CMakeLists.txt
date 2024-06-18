@@ -12,5 +12,6 @@ add_executable(practice main.c
         algorithms/task/3_points_inside_ellipse.h
         algorithms/task/4_subtrack_average.h
         data_structures/matrix/matrix.h
-        data_structures/matrix/matrix.c)
+        data_structures/matrix/matrix.c
+        algorithms/task/5_is_transposed_matrix.h)
 target_link_libraries(practice m)
