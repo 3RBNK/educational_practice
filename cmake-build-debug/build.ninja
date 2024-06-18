@@ -55,6 +55,12 @@ build CMakeFiles/practice.dir/main.c.o: C_COMPILER__practice_unscanned_Debug /ho
   OBJECT_DIR = CMakeFiles/practice.dir
   OBJECT_FILE_DIR = CMakeFiles/practice.dir
 
+build CMakeFiles/practice.dir/data_structures/matrix/matrix.c.o: C_COMPILER__practice_unscanned_Debug /home/bnkr/CLionProjects/practice/data_structures/matrix/matrix.c || cmake_object_order_depends_target_practice
+  DEP_FILE = CMakeFiles/practice.dir/data_structures/matrix/matrix.c.o.d
+  FLAGS = -lm -g -std=gnu11 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/practice.dir
+  OBJECT_FILE_DIR = CMakeFiles/practice.dir/data_structures/matrix
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target practice
@@ -63,7 +69,7 @@ build CMakeFiles/practice.dir/main.c.o: C_COMPILER__practice_unscanned_Debug /ho
 #############################################
 # Link the executable practice
 
-build practice: C_EXECUTABLE_LINKER__practice_Debug CMakeFiles/practice.dir/main.c.o
+build practice: C_EXECUTABLE_LINKER__practice_Debug CMakeFiles/practice.dir/main.c.o CMakeFiles/practice.dir/data_structures/matrix/matrix.c.o
   FLAGS = -lm -g
   LINK_LIBRARIES = -lm
   OBJECT_DIR = CMakeFiles/practice.dir
