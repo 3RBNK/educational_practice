@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include "algorithms/task/1_convert_to_metric_system.h"
+#include "algorithms/task/2_determine_triangle.h"
 
 int main(void) {
-    convert_to_metric_system();
+    determine_triangle();
 
     return 0;
 }
