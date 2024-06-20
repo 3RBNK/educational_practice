@@ -1,10 +1,10 @@
-#include "algorithms/task/10_refactor_text.h"
+#include "algorithms/task/8_find_convex_hull.h"
 
-int main() {
-    const char filename[] = "/home/bnkr/CLionProjects/practice/for_while_if_else_int.txt";
-    char text[] = "for float россия int i = 0; i < 10; i++";
+int main(void) {
+    char inputfile[] = "/home/bnkr/CLionProjects/practice/CONVEX.IN";
+    const char outputfile[] = "/home/bnkr/CLionProjects/practice/CONVEX.OUT";
 
-    refactor_text(text, filename);
+    find_convex_hull(inputfile, outputfile);
 
     return 0;
 }
