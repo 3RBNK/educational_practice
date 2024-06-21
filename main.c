@@ -1,7 +1,7 @@
-#include "algorithms/task/8_find_convex_hull.h"
+#include "algorithms/task/10_refactor_text.h"
 
 int main(void) {
-    test_find_convex_hull();
+    test_refactor_text();
 
     return 0;
 }
