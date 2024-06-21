@@ -1,7 +1,7 @@
-#include"algorithms/task/3_points_inside_ellipse.h"
+#include "algorithms/task/4_subtrack_average.h"
 
 int main(void) {
-    test_get_points_inside_ellipse();
+    test_subtrack_average();
 
     return 0;
 }
