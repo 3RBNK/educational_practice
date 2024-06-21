@@ -1,7 +1,7 @@
-#include "algorithms/task/7_get_multiples_of_eleven.h"
+#include "algorithms/task/9_matrix_multiplication.h"
 
 int main(void) {
-    test_get_multiples_of_eleven();
+    test_matrix_multiplication();
 
     return 0;
 }
