@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <assert.h>
 
 
 bool _is_multiples_of_eleven(int x) {
@@ -46,6 +47,33 @@ int get_multiples_of_eleven(const int m) {
     return result;
 }
 
+
+void test_get_multiples_of_eleven_no_multiples() {
+    const int result = get_multiples_of_eleven(10);
+
+    assert(result == 0);
+}
+
+
+void test_get_multiples_of_eleven_negative_numbers() {
+    const int result = get_multiples_of_eleven(-10);
+
+    assert(result == 0);
+}
+
+
+void test_get_multiples_of_eleven_more_numbers() {
+    const int result = get_multiples_of_eleven(100);
+
+    assert(result == 9);
+}
+
+
+void test_get_multiples_of_eleven() {
+    test_get_multiples_of_eleven_no_multiples();
+    test_get_multiples_of_eleven_negative_numbers();
+    test_get_multiples_of_eleven_more_numbers();
+}
 
 
 

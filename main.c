@@ -1,7 +1,7 @@
-#include "algorithms/task/5_is_transposed_matrix.h"
+#include "algorithms/task/7_get_multiples_of_eleven.h"
 
 int main(void) {
-    test_is_transposed_matrix();
+    test_get_multiples_of_eleven();
 
     return 0;
 }
