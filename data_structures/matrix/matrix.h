@@ -5,7 +5,7 @@
 #ifndef CODE_MATRIX_H
 #define CODE_MATRIX_H
 
-
+#include <stdio.h>
 #include <stdbool.h>
 
 

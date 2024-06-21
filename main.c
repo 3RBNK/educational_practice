@@ -1,7 +1,7 @@
-#include "algorithms/task/4_subtrack_average.h"
+#include "algorithms/task/5_is_transposed_matrix.h"
 
 int main(void) {
-    test_subtrack_average();
+    test_is_transposed_matrix();
 
     return 0;
 }

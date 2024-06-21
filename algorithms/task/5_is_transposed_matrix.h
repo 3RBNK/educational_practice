@@ -6,6 +6,7 @@
 #define PRACTICE_5_IS_TRANSPOSED_MATRIX_H
 
 #include <stdbool.h>
+#include <assert.h>
 
 #include "../../data_structures/matrix/matrix.h"
 
@@ -36,6 +37,85 @@ bool is_transposed_matrix(matrix* a, matrix* b) {
     free_mem_matrix(&temp);
 
     return is_transposed;
+}
+
+
+void test_is_transposed_matrix_equal_matrix() {
+    matrix a = create_matrix_from_array((int[]) {1, 2, 3,
+                                                 4, 5, 6,
+                                                 7, 8, 9}, 3, 3);
+
+    matrix b = create_matrix_from_array((int[]) {1, 2, 3,
+                                                 4, 5, 6,
+                                                 7, 8, 9}, 3, 3);
+
+    assert(is_transposed_matrix(&a, &b));
+
+    free_mem_matrix(&a);
+    free_mem_matrix(&b);
+}
+
+
+void test_is_transposed_matrix_transposed_matrix() {
+    matrix a = create_matrix_from_array((int[]) {1, 2, 3,
+                                                 4, 5, 6,
+                                                 7, 8, 9}, 3, 3);
+
+    matrix b = create_matrix_from_array((int[]) {1, 2, 3,
+                                                 4, 5, 6,
+                                                 7, 8, 9}, 3, 3);
+
+    transpose_square_matrix(&b);
+
+    assert(is_transposed_matrix(&a, &b));
+
+    free_mem_matrix(&a);
+    free_mem_matrix(&b);
+}
+
+
+void test_is_transposed_matrix_transposed_of_side_diagonal() {
+    matrix a = create_matrix_from_array((int[]) {1, 2, 3,
+                                                 4, 5, 6,
+                                                 7, 8, 9}, 3, 3);
+
+    matrix b = create_matrix_from_array((int[]) {1, 2, 3,
+                                                 4, 5, 6,
+                                                 7, 8, 9}, 3, 3);
+
+    transpose_square_matrix_of_side_diagonal(&b);
+
+    assert(is_transposed_matrix(&a, &b));
+
+    free_mem_matrix(&a);
+    free_mem_matrix(&b);
+}
+
+
+void test_is_transposed_matrix_double_transposed() {
+    matrix a = create_matrix_from_array((int[]) {1, 2, 3,
+                                                 4, 5, 6,
+                                                 7, 8, 9}, 3, 3);
+
+    matrix b = create_matrix_from_array((int[]) {1, 2, 3,
+                                                 4, 5, 6,
+                                                 7, 8, 9}, 3, 3);
+
+    transpose_square_matrix(&b);
+    transpose_square_matrix_of_side_diagonal(&b);
+
+    assert(is_transposed_matrix(&a, &b));
+
+    free_mem_matrix(&a);
+    free_mem_matrix(&b);
+}
+
+
+void test_is_transposed_matrix() {
+    test_is_transposed_matrix_equal_matrix();
+    test_is_transposed_matrix_transposed_matrix();
+    test_is_transposed_matrix_transposed_of_side_diagonal();
+    test_is_transposed_matrix_double_transposed();
 }
 
 
