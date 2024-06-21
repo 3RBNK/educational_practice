@@ -1,5 +1,5 @@
 #include "algorithms/task/8_find_convex_hull.h"
-#include "algorithms/task/1_convert_to_metric_system.h"
+#include "algorithms/task/2_determine_triangle.h"
 
 int main(void) {
     // char inputfile[] = "/home/bnkr/CLionProjects/practice/CONVEX.IN";
@@ -7,7 +7,7 @@ int main(void) {
     //
     // find_convex_hull(inputfile, outputfile);
 
-    test_convert_to_metric_system();
+   test_determine_triangle();
 
     return 0;
 }

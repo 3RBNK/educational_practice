@@ -20,17 +20,7 @@ double max2(const double a, const double b) {
 }
 
 
-void determine_triangle() {
-    int x1, y1, x2, y2, x3, y3;
-    printf("Input coord A\n");
-    scanf("%d %d", &x1, &y1);
-
-    printf("Input coord B\n");
-    scanf("%d %d", &x2, &y2);
-
-    printf("Input coord C\n");
-    scanf("%d %d", &x3, &y3);
-
+void determine_triangle(const int x1, const int y1, const int x2, const int y2, const int x3, const int y3) {
     const double AB = sqrt(pow(x2 - x1, 2) +  pow(y2 - y1, 2));
     const double BC = sqrt(pow(x3 - x2, 2) +  pow(y3 - y2, 2));
     const double CA = sqrt(pow(x1 - x3, 2) +  pow(y1 - y3, 2));
@@ -40,14 +30,34 @@ void determine_triangle() {
     const double mid = AB + BC + CA - (min + max);
 
     if (fabs(min * min + mid * mid - max * max) < DBL_EPSILON) {
-        printf("a right-angled triangle");
+        printf("a right-angled triangle\n");
     } else if (min * min + mid * mid > max * max) {
-        printf("an acute-angled triangle");
+        printf("an acute-angled triangle\n");
     } else if (min * min + mid * mid < max * max) {
-        printf("an obtuse triangle");
-    } else {
-        printf("It's not a triangle");
+        printf("an obtuse triangle\n");
     }
+}
+
+
+void test_determine_triangle_is_right_angled() {
+    determine_triangle(0, 0, 3, 0, 3, 4);
+}
+
+
+void test_determine_triangle_is_acute_angled() {
+    determine_triangle(0, 0, 3, 0, 1, 6);
+}
+
+
+void test_determine_triangle_is_obtuse_angled() {
+    determine_triangle(0, 0, 3, 0, 5, 6);
+}
+
+
+void test_determine_triangle() {
+    test_determine_triangle_is_right_angled(); // a right-angled triangle
+    test_determine_triangle_is_acute_angled(); // an acute-angled triangle
+    test_determine_triangle_is_obtuse_angled(); // an obtuse triangle
 }
 
 
