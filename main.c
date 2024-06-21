@@ -1,7 +1,7 @@
-#include "algorithms/task/9_matrix_multiplication.h"
+#include "algorithms/task/8_find_convex_hull.h"
 
 int main(void) {
-    test_matrix_multiplication();
+    test_find_convex_hull();
 
     return 0;
 }

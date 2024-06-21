@@ -8,6 +8,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <assert.h>
+#include <float.h>
 #include <math.h>
 
 #define MAX_POINTS 10001
@@ -31,7 +33,7 @@ Face hull_faces[MAX_POINTS];
 PairIndex edge_to_face[MAX_POINTS][MAX_POINTS];
 int num_faces = 0;
 
-Vector3 cross(Vector3 v1, Vector3 v2) {
+Vector3 cross(const Vector3 v1, const Vector3 v2) {
     Vector3 result;
     result.x = v1.y * v2.z - v1.z * v2.y;
     result.y = v1.z * v2.x - v1.x * v2.z;
@@ -39,7 +41,7 @@ Vector3 cross(Vector3 v1, Vector3 v2) {
     return result;
 }
 
-Vector3 sub(Vector3 v1, Vector3 v2) {
+Vector3 sub(const Vector3 v1, const Vector3 v2) {
     Vector3 result;
     result.x = v1.x - v2.x;
     result.y = v1.y - v2.y;
@@ -47,11 +49,11 @@ Vector3 sub(Vector3 v1, Vector3 v2) {
     return result;
 }
 
-float dot(Vector3 v1, Vector3 v2) {
+float dot(const Vector3 v1, const Vector3 v2) {
     return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
 }
 
-void insert(PairIndex* pair, int a) {
+void insert(PairIndex* pair, const int a) {
     if(pair->i1 == -1) {
         pair->i1 = a;
     } else {
@@ -59,7 +61,7 @@ void insert(PairIndex* pair, int a) {
     }
 }
 
-void remove_index(PairIndex* pair, int a) {
+void remove_index(PairIndex* pair, const int a) {
     if(pair->i1 == a) {
         pair->i1 = -1;
     } else if(pair->i2 == a) {
@@ -68,7 +70,7 @@ void remove_index(PairIndex* pair, int a) {
 }
 
 
-int num_ver(PairIndex* pair) {
+int num_ver(const PairIndex* pair) {
     int a = 0;
     if(pair->i1 != -1) {
         a++;
@@ -79,7 +81,7 @@ int num_ver(PairIndex* pair) {
     return a;
 }
 
-Face add_face(int p1, int p2, int p3, int mid) {
+Face add_face(const int p1, const int p2, const int p3, const int mid) {
     insert(&edge_to_face[p1][p2], p3);
     insert(&edge_to_face[p2][p1], p3);
     insert(&edge_to_face[p2][p3], p1);
@@ -136,13 +138,13 @@ void hullInitial(int n) {
 
 
 void find_convex_hull(char* inputfile, const char* outputfile) {
-    int n = getPoints(inputfile);
+    const int n = getPoints(inputfile);
 
     hullInitial(n);
 
     for(int i = 4; i < n; i++) {
         for(int j = 0; j < num_faces; j++) {
-            Face f = hull_faces[j];
+            const Face f = hull_faces[j];
 
             if(dot(f.normal, all_points[i]) > f.dfo) {
                 remove_index(&edge_to_face[f.c1][f.c2], f.c3);
@@ -155,9 +157,9 @@ void find_convex_hull(char* inputfile, const char* outputfile) {
             }
         }
 
-        int num_f = num_faces;
+        const int num_f = num_faces;
         for(int j = 0; j < num_f; j++) {
-            Face f = hull_faces[j];
+            const Face f = hull_faces[j];
             if(num_ver(&edge_to_face[f.c1][f.c2]) != 2) {
                 hull_faces[num_faces++] = add_face(f.c1, f.c2, i, f.c3);
             }
@@ -174,9 +176,9 @@ void find_convex_hull(char* inputfile, const char* outputfile) {
     int hull_size = 0;
 
     for(int i = 0; i < n; i++) {
-        Vector3 v = all_points[i];
+        const Vector3 v = all_points[i];
         for(int j = 0; j < num_faces; j++) {
-            float d = hull_faces[j].dfo - dot(hull_faces[j].normal, v);
+            const float d = hull_faces[j].dfo - dot(hull_faces[j].normal, v);
             if(d == 0) {
                 hull_points[hull_size++] = all_points[i];
                 break;
@@ -196,6 +198,97 @@ void find_convex_hull(char* inputfile, const char* outputfile) {
     }
 
     fclose(file);
+}
+
+
+void test_find_convex_hull_three_points() {
+    char inputfile[] = "/home/bnkr/CLionProjects/practice/file_for_tasks/8_find_convex_hull/test_three_points.IN";
+    const char outputfile[] = "/home/bnkr/CLionProjects/practice/file_for_tasks/8_find_convex_hull/test_three_points.OUT";
+
+    find_convex_hull(inputfile, outputfile);
+
+    int n;
+    Vector3 n1;
+    Vector3 n2;
+    Vector3 n3;
+
+    FILE* file = fopen(outputfile, "r");
+
+    fscanf(file, "%d", &n);
+    fscanf(file, "%f %f %f", &n1.x, &n1.y, &n1.z);
+    fscanf(file, "%f %f %f", &n2.x, &n2.y, &n2.z);
+    fscanf(file, "%f %f %f", &n3.x, &n3.y, &n3.z);
+
+    fclose(file);
+
+    assert(fabs(n1.x) < DBL_EPSILON && fabs(n1.y) < DBL_EPSILON  && fabs(n1.z - 10.0) < DBL_EPSILON );
+    assert(fabs(n2.x - 10.0) < DBL_EPSILON && fabs(n2.y) < DBL_EPSILON  && fabs(n2.z) < DBL_EPSILON );
+    assert(fabs(n3.x) < DBL_EPSILON && fabs(n3.y) < DBL_EPSILON  && fabs(n3.z) < DBL_EPSILON);
+}
+
+
+void test_find_convex_hull_four_points() {
+    char inputfile[] = "/home/bnkr/CLionProjects/practice/file_for_tasks/8_find_convex_hull/test_four_points.IN";
+    const char outputfile[] = "/home/bnkr/CLionProjects/practice/file_for_tasks/8_find_convex_hull/test_four_points.OUT";
+
+    find_convex_hull(inputfile, outputfile);
+
+    int n;
+    Vector3 n1;
+    Vector3 n2;
+    Vector3 n3;
+    Vector3 n4;
+
+    FILE* file = fopen(outputfile, "r");
+
+    fscanf(file, "%d", &n);
+    fscanf(file, "%f %f %f", &n1.x, &n1.y, &n1.z);
+    fscanf(file, "%f %f %f", &n2.x, &n2.y, &n2.z);
+    fscanf(file, "%f %f %f", &n3.x, &n3.y, &n3.z);
+    fscanf(file, "%f %f %f", &n4.x, &n4.y, &n4.z);
+
+    fclose(file);
+
+    assert(fabs(n1.x) < DBL_EPSILON && fabs(n1.y) < DBL_EPSILON  && fabs(n1.z) < DBL_EPSILON );
+    assert(fabs(n2.x - 10.0) < DBL_EPSILON && fabs(n2.y) < DBL_EPSILON  && fabs(n2.z) < DBL_EPSILON );
+    assert(fabs(n3.x) < DBL_EPSILON && fabs(n3.y - 10) < DBL_EPSILON  && fabs(n3.z) < DBL_EPSILON);
+    assert(fabs(n4.x) < DBL_EPSILON && fabs(n4.y) < DBL_EPSILON  && fabs(n4.z - 10) < DBL_EPSILON);
+}
+
+
+void test_find_convex_hull_more_points() {
+    char inputfile[] = "/home/bnkr/CLionProjects/practice/file_for_tasks/8_find_convex_hull/test_more_points.IN";
+    const char outputfile[] = "/home/bnkr/CLionProjects/practice/file_for_tasks/8_find_convex_hull/test_more_points.OUT";
+
+    find_convex_hull(inputfile, outputfile);
+
+    int n;
+    Vector3 n1;
+    Vector3 n2;
+    Vector3 n3;
+    Vector3 n4;
+
+    FILE* file = fopen(outputfile, "r");
+
+    fscanf(file, "%d", &n);
+    fscanf(file, "%f %f %f", &n1.x, &n1.y, &n1.z);
+    fscanf(file, "%f %f %f", &n2.x, &n2.y, &n2.z);
+    fscanf(file, "%f %f %f", &n3.x, &n3.y, &n3.z);
+    fscanf(file, "%f %f %f", &n4.x, &n4.y, &n4.z);
+
+    fclose(file);
+
+    assert(fabs(n1.x) < DBL_EPSILON && fabs(n1.y) < DBL_EPSILON  && fabs(n1.z) < DBL_EPSILON );
+    assert(fabs(n2.x - 10.0) < DBL_EPSILON && fabs(n2.y) < DBL_EPSILON  && fabs(n2.z) < DBL_EPSILON );
+    assert(fabs(n3.x) < DBL_EPSILON && fabs(n3.y - 10) < DBL_EPSILON  && fabs(n3.z) < DBL_EPSILON);
+    assert(fabs(n4.x) < DBL_EPSILON && fabs(n4.y) < DBL_EPSILON  && fabs(n4.z - 10) < DBL_EPSILON);
+}
+
+
+void test_find_convex_hull() {
+    test_find_convex_hull_three_points();
+    test_find_convex_hull_four_points();
+    test_find_convex_hull_more_points();
 }
 
 
