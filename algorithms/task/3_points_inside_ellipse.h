@@ -20,8 +20,11 @@ int get_points_inside_ellipse(const double a, const double b) {
     int result = 0;
     for (int i = -whole_a; i < whole_a + 1; i++)
         for (int j = -whole_b; j < whole_b + 1; j++)
-            if (i * i / (whole_a * whole_a) + j * j / (whole_b * whole_b) <= 1)
+            if (i * i / (whole_a * whole_a) + j * j / (whole_b * whole_b) <= 1) {
+                printf("%d %d\n", i, j);
                 result++;
+            }
+
 
     return result;
 }

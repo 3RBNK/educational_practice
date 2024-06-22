@@ -85,14 +85,14 @@ void test_refactor_text_word_only_from_set() {
 
 
 void test_refactor_text_different_word() {
-    char text[] = "for русский while if else url ";
+    char text[] = "for рУсский while if else uRl ";
     const char filename[] = "/home/bnkr/CLionProjects/practice/file_for_tasks/10_refactor_text/set_word.txt";
 
     const char* refactoring = refactor_text(text, filename);
 
     puts(refactoring);
 
-    assert(strcmp(refactoring, "FOR русский WHILE IF ELSE url ") == 0);
+    assert(strcmp(refactoring, "FOR рУсский WHILE IF ELSE url ") == 0);
 }
 
 

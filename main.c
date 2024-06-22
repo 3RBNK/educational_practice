@@ -1,7 +1,8 @@
-#include "algorithms/task/10_refactor_text.h"
+#include "algorithms/task/6_get_upper_envelope.h"
+
 
 int main(void) {
-    test_refactor_text();
+    test_get_upper_envelope();
 
     return 0;
 }
